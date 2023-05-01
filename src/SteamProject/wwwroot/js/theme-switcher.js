@@ -1,9 +1,9 @@
-﻿$(document).ready(function () {
+﻿document.addEventListener('DOMContentLoaded', function () {
     // Apply the user's theme preference on page load
     applyThemePreference();
 
-    $("#color_mode").on("change", function () {
-        var theme = $(this).prop("checked") ? "dark" : "light";
+    $("#hide-checkbox").on("change", function () {
+        var theme = $(this).prop("checked") ? "light" : "dark";
         updateTheme(theme);
     });
 });
@@ -17,12 +17,14 @@ function applyThemePreference() {
 
         // Set the initial state of the toggle switch
         if (theme === "dark") {
-            $("#color_mode").prop("checked", true);
+            $("#hide-checkbox").prop("checked", false);
         } else {
-            $("#color_mode").prop("checked", false);
+            $("#hide-checkbox").prop("checked", true);
         }
     }
 }
+
+
 
 // Function to update the theme
 function updateTheme(theme) {
@@ -36,10 +38,13 @@ function updateTheme(theme) {
         dataType: "text",
         url: url,
         success: function () {
-            location.reload();
+            // Update the theme on the client side
+            var themeLink = $("#theme-link");
+            themeLink.attr("href", "/css/" + theme + "-theme.css");
         },
         error: function (jqXHR, textStatus, errorThrown) {
             console.error("Error updating theme: ", jqXHR);
         },
     });
 }
+

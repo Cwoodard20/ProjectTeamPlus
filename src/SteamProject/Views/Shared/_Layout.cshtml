@@ -123,6 +123,7 @@
             @if (User.Identity.Name != null)
             {
                 @await Component.InvokeAsync("ThemeSwitcher")
+                
             }
             <link id="theme-link" rel="stylesheet" href="~/css/@(Context.Items["Theme"] ?? "light")-theme.css" asp-append-version="true" />
         </div>
